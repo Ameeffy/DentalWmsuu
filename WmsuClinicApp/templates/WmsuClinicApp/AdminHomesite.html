@@ -1,0 +1,821 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css">
+    <title>Dental Assessment</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+   
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+</head>
+<body>
+
+
+            
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <section class="HeaderSection">
+        <img src="{% static 'images/OIP1.JPG' %}" alt="logo" class="circular-imgs"> 
+        <p>UNIVERSITY HEALTH SERVICES CENTER</p>
+
+        <section class="right" style="display: flex; justify-content: center;"> <p>Welcome to Dental Clinic</p></section>
+    </section>
+    
+    <nav>
+        <ul>
+           
+            <h1 class="gradient-text">Dental Clinic</h1>
+
+            <h4 style="display: flex; justify-content: left; margin-left: 5px; margin-bottom: 0px; font-weight: normal;">General</h4>
+            <li><a href="{% url 'admin_Dashboard' %}"><i class="fas fa-columns"></i> Dashboard</a></li>
+
+            <li><a href="{% url 'admin_homesite' %}"><i class="fas fa-clipboard-list"></i> Assessment</a></li>
+            <li><a href="{% url 'appointment_list' %}"><i class="far fa-calendar-alt"></i> Appointment</a></li>
+            <li><a href="{% url 'dental_record' %}"><i class="fas fa-file-medical"></i> Dental Records</a></li>
+            <li style="cursor: pointer;" id="user-toggle"><i class="fas fa-user"> </i> Patient <span class="icon-after"></span></li>
+
+            <li id="student-link" style="display: none;"><a href="{% url 'admin_list' %}"><i class="fas fa-user-graduate"></i> Student</a></li>
+            <li id="faculty-staff-link" style="display: none;"><a href="{% url 'admin_listFaculty' %}"><i class="fas fa-users"></i> Faculty & Staff</a></li>
+            <li><a href="{% url 'admin_doctorsite' %}"><i class="fas fa-user-md"></i> Dental Staff</a></li>
+           
+            <li><a href="{% url 'supply_listhome' %}"><i class="fas fa-box"></i> Supplies</a></li>
+            
+            <li><a href="{% url 'admin_doctoravailability' %}"><i class="far fa-calendar-check"></i> Schedule</a></li>
+            <h4 style="display: flex; justify-content: left; margin-left: 5px; margin-bottom: 0px;font-weight: normal;">Settings</h4>
+
+            <li><a href="#"><i class="fas fa-question-circle"></i> Help and Support</a></li>
+            <li><a href="{% url 'dentalchange_password' %}"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="{% url 'LoginDentals' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+    <style>  .HeaderSection {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 1px;
+        left: 4px;
+        color: white;
+        width: calc(100% - 8px); 
+        background-color: rgb(44, 41, 41);
+        border: 1px solid rgba(255, 248, 248, 0.24);
+        
+        font-weight: lighter; 
+    }
+    .right {
+        margin-left: auto ; 
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        margin-right: 10px;
+    }
+    
+    .gradient-text {
+        font-size: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        background: linear-gradient(to right, #fff, #ff0000); 
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text; 
+        color: transparent; }
+        .icon-after {
+        margin-left: 5px; /* Adjust margin as needed */
+      }
+      i {
+        margin-right: 5px;
+      }
+      .circular-imgs {
+        border-radius: 50%;
+        max-width: 35px;
+        height: auto;
+        margin-right: 2px;
+    }nav {
+    margin-top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 100%; 
+    height: 100%; 
+    background-color: rgb(7, 7);
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    font-size: 15px;
+    border-right: 1px solid rgba(255, 248, 248, 0.24);
+    
+    
+}
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: flex;
+    justify-content: left; 
+            text-decoration: none;
+            color: #fff;
+            
+            transition: color 0.3s;
+            padding: 18px;
+            
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+}
+
+nav ul li a  {
+    text-decoration: none;
+    color: #fff;
+    
+    transition: color 0.5s;
+   
+    
+}
+nav li:hover{
+    color: red;
+}
+nav ul li a:hover {
+    color: red;
+}:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #b9b9b9;
+  background: linear-gradient(to left, rgb(29, 28, 28), rgb(14, 11, 11));
+}
+    </style>
+    
+      
+    <script>
+        document.getElementById('user-toggle').addEventListener('click', function() {
+            var studentLink = document.getElementById('student-link');
+            var facultyStaffLink = document.getElementById('faculty-staff-link');
+            
+            if (studentLink.style.display === 'none') {
+                studentLink.style.display = 'block';
+                facultyStaffLink.style.display = 'block';
+            } else {
+                studentLink.style.display = 'none';
+                facultyStaffLink.style.display = 'none';
+            }
+        });
+        document.getElementById('user-toggle').innerHTML += '<span class="icon-after">></span>';
+
+    </script>
+
+    <script>
+    
+    
+        function viewAppointment(appointmentId) {
+        
+            window.location.href = "/view_appointmentAdmin/" + appointmentId + "/";
+        }
+
+        function updateDateTime() {
+                var now = new Date();
+                var dateTimeString = now.toLocaleString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+                document.getElementById("currentDateTime").innerText = dateTimeString;
+            }
+            
+         
+            setInterval(updateDateTime, 1000);
+            
+           
+            updateDateTime();
+    
+      
+    </script>
+    <div class="Move">      
+          
+            
+            
+<script>
+    
+    function searchTable() {
+   
+}
+ 
+</script>
+
+    </header>  
+     
+  <div id="currentDateTime"> </div>
+    <p class="ps">Today's Appointment</p>
+    <div class="containera">
+        <input type="text" id="searchInput" placeholder="Search...">
+    </div>
+    <style> .ps {
+        font-size: x-large;
+        margin-bottom: 10px;
+    }
+    .Move{
+        margin-top: 20px;
+        margin-left: 260px;
+        margin-right: 10px;
+    }
+    
+    </style>
+    <div>
+        <table border="1">
+            <thead>
+                
+                <tr>
+                    <th>Patient Name</th>
+                   
+                    <th>Preferred Date</th>
+                    <th>Preferred Time</th>
+                    <th>Purpose</th>
+                    <th>View</th>
+                    
+                    
+                    
+                   
+                    <th>Status</th> 
+                    <th>Action</th>
+                
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% if appointments %}
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>
+                            {% if appointment.full_name_dependant %}
+                            {{ appointment.user.first_name }} {{ appointment.user.last_name }}
+                                {{ appointment.full_name_dependant }}
+                            {% else %}
+                                {{ appointment.user.first_name }} {{ appointment.user.last_name }}
+                            {% endif %}
+                        </td>
+                        
+                       
+                        <td>{{ appointment.preferred_date }}</td>
+                        <td>{{ appointment.preferred_time }}</td>         
+                        <td>{{ appointment.purpose }}</td>
+                        <td>
+                            {% if appointment.cor_upload %}
+                            {% if appointment.user.profile.user_type == 'Student' %}
+                                <a href="{{ appointment.cor_upload.url }}" target="_blank" class="cor-button">
+                                    Certificate of Registration
+                                </a>
+                            {% elif appointment.user.profile.user_type == 'FacultyandStaff' %}
+                                <a href="{{ appointment.cor_upload.url }}" target="_blank" class="cor-button">
+                                    Employee ID
+                                </a>
+                            {% endif %}
+                        {% else %}
+                            No upload
+                        {% endif %}
+                        
+
+                            <br>
+                            <a style="margin-top: 10px;" href="#" class="cor-button" onclick="viewAppointment('{{ appointment.appointment_id }}')">
+                                 Appointment Form
+                            </a>
+                        </td>
+                        
+                        <script>
+                          function confirmSessionDone(appointmentId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Are you sure you want to mark this appointment as "Session Done"?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, mark as Session Done',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Appointment marked as "Session Done" successfully',
+                icon: 'success',
+                showConfirmButton: false,
+                
+            });
+
+            // Set a timeout to reload the page after the success message is displayed
+           
+            
+            // Submit the form after a short delay
+            setTimeout(() => {
+                document.getElementById('sessionDoneForm' + appointmentId).submit();
+            }, 1500); // Submit after 500 milliseconds (0.5 second)
+        }
+    });
+}
+
+
+                        
+function confirmFailedToAttend(appointmentId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Are you sure this patient failed to attend the appointment?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, mark as Failed to Attend',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Show success message with timer
+            Swal.fire({
+                title: 'Success!',
+                text: 'Appointment marked as "Failed to Attend" successfully',
+                icon: 'success',
+                showConfirmButton: false,
+                
+            });
+
+            
+          
+            
+            setTimeout(() => {
+                document.getElementById('failedToAttendForm' + appointmentId).submit();
+            }, 1500);
+        }
+    });
+}
+
+function confirmDecline(appointmentId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'Are you sure you want to decline this appointment?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, decline appointment',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            
+            Swal.fire({
+                title: 'Success!',
+                text: 'Appointment declined successfully',
+                icon: 'success',
+                showConfirmButton: false,
+                
+            });
+
+            
+          
+            
+            setTimeout(() => {
+                document.getElementById('declineForm' + appointmentId).submit();
+            }, 1500);
+        }
+    });
+}
+
+                        </script>
+                        
+                        
+                        <td class="{% if appointment.status == 'Session Done' %}green{% elif appointment.status == 'Failed to Attend' %}tomato{% elif appointment.status == 'Decline' %}red{% else %}yellow{% endif %}">
+                            {{ appointment.status }} <br>
+                            {% if appointment.status == 'Pending' %}
+                                <form id="sessionDoneForm{{ appointment.appointment_id }}" action="{% url 'session_done' appointment_id=appointment.appointment_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="button" id="sessionDoneButton{{ appointment.appointment_id }}" onclick="confirmSessionDone('{{ appointment.appointment_id }}')" style="color: rgb(4, 146, 4); border: 1px solid rgb(20, 151, 20); padding: 8px 10px; border-radius: 5px;">
+                                        <i class="fas fa-check"></i> Success
+                                    </button>
+                                </form>
+                                <form id="failedToAttendForm{{ appointment.appointment_id }}" action="{% url 'failed_to_attend' appointment_id=appointment.appointment_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="button" id="failedToAttendButton{{ appointment.appointment_id }}" onclick="confirmFailedToAttend('{{ appointment.appointment_id }}')" style="color: rgb(255, 153, 35); border: 1px solid tomato; padding: 8px 10px; border-radius: 5px;">
+                                        <i class="fas fa-times"></i> Failed to attend
+                                    </button>
+                                </form>
+                                <form id="declineForm{{ appointment.appointment_id }}" action="{% url 'Decline' appointment_id=appointment.appointment_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="button" id="declineButton{{ appointment.appointment_id }}" onclick="confirmDecline('{{ appointment.appointment_id }}')" style="color: rgb(233, 7, 7); border: 1px solid red; padding: 8px 10px; border-radius: 5px;">
+                                        <i class="fas fa-times-circle"></i> Decline
+                                    </button>
+                                </form>
+                            {% endif %}
+                        </td>
+<script></script>                        
+                                          
+                        
+                        
+                       
+                        <td>
+                            {% if appointment.status == 'Pending' %}
+    <form method="post" action="{% url 'update_appointment' appointment_id=appointment.appointment_id %}" id="rescheduleForm">
+        {% csrf_token %}
+        <a href="#" onclick="confirmReschedule()">
+            <i style="color: rgb(0, 195, 255);" class="fas fa-calendar-check"></i>
+        </a>
+    </form><br>
+{% endif %}
+
+                            
+{% if appointment.purpose == 'Extraction' and appointment.status != 'Pending' and not appointment.dentalextraction_set.exists and appointment.status != 'Failed to Attend' %}
+    <form style="margin-top: 20px;" id="extractionForm" action="{% url 'appointment_extraction' appointment_id=appointment.appointment_id %}" method="GET">
+        {% csrf_token %}
+        <button type="button" onclick="confirmExtraction('{{ appointment.appointment_id }}')" id="extraction-link">
+            <i class="fas fa-tooth"></i> Extraction 
+        </button>
+    </form><br>
+{% endif %}
+
+<script>
+    function confirmExtraction(appointmentId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to proceed with extraction.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, proceed',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("extractionForm").submit();
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+                        
+                        
+{% if appointment.status == "Decline" and not appointment.report %}
+<form id="reportForm" action="{% url 'appointment_report' appointment_id=appointment.appointment_id %}" method="post">
+    {% csrf_token %}
+    <button type="button" id="reportButton" onclick="confirmReport('{{ appointment.appointment_id }}')">
+        <i style="color: #ff0000; margin-bottom: 16px;" class="fas fa-exclamation-triangle"></i>
+    </button>
+</form>
+{% endif %}
+<script>
+    function confirmReport(appointmentId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to report this appointment.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, report as declined',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('reportForm').submit();
+            }
+        });
+    }
+</script>
+
+
+<script>
+function confirmReport(appointmentId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to report this appointment.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, report',
+        cancelButtonText: 'No, cancel',
+        dangerMode: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('reportForm{{ appointmentId }}').submit();
+        }
+    });
+}
+</script>
+
+
+{% if appointment.status == 'Pending' %}
+<form id="updateForm" method="post" action="{% url 'update_purpose' appointment_id=appointment.appointment_id %}">
+    {% csrf_token %}
+    <button type="button" id="updateButton" style="background: none; border: none; cursor: pointer;">
+        <i class="fas fa-edit" style="margin-left: 5px;"></i>
+    </button>
+</form>
+{% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.getElementById('updateButton').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to update the purpose?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+               
+                document.getElementById('updateForm').submit();
+            }
+        });
+    });
+</script>
+
+
+
+
+                        </td>
+                        
+                        
+                        
+            <style> #rescheduleForm i{
+color: rgb(8, 93, 221);
+            }
+                #reportForm i{
+                text-decoration: none;
+                color: red;
+                margin-top: 20px;
+                
+               }
+               #extraction-link i{
+                text-decoration: none;
+                color: rgb(255, 255, 255);
+               }
+               #extraction-link{
+                text-decoration: none;
+                color: rgb(255, 255, 255);
+                border: 1px solid rgb(255, 255, 255);
+                padding: 10px;
+               }
+               </style>            
+
+
+<script>
+
+
+    function confirmReschedule() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You are about to re-schedule this appointment.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, re-schedule it',
+            cancelButtonText: 'No, cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('rescheduleForm').submit();
+            }
+        });
+    }
+</script>
+<style>
+    
+    .swal2-popup {
+        background-color: #131010d3; 
+    }
+
+    .swal2-title {
+        color: #ffffff; 
+    }
+
+    .swal2-content {
+        color: #ffffff; 
+    }
+
+   
+    .swal2-confirm {
+        background-color: #28a745 !important; 
+        color: #ffffff !important; 
+    }
+
+    
+    .swal2-cancel {
+        background-color: #dc3545 !important; 
+        color: #ffffff !important; 
+    }
+</style>
+                       
+                        
+                        
+                    </tr>
+                    
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="15">
+                        <h1>No Appointment today</h1>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+            
+        </table>
+    </div>
+
+</div>
+</div>
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const tableBody = document.getElementById('tableBody');
+
+    searchInput.addEventListener('input', function() {
+        const searchQuery = this.value.toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (let row of rows) {
+            let found = false;
+            const cells = row.getElementsByTagName('td');
+            for (let cell of cells) {
+                if (cell.innerText.toLowerCase().includes(searchQuery)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    });
+</script>
+<style> 
+ .cor-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #241919e3; 
+    border: 1px solid rgba(255, 248, 248, 0.24);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cor-button:hover {
+    background-color: #850505; 
+}
+  .green {
+   
+   color: rgb(9, 252, 9);
+}
+
+.tomato {
+   
+   color: rgb(255, 153, 35);
+}
+
+.red {
+   
+   color: rgb(247, 6, 6);
+}
+
+.yellow {
+   
+   color:  rgb(247, 247, 6);
+}
+
+ .containera {
+    display: flex;
+    justify-content: left; 
+    align-items: center; 
+    
+}
+          #searchInput {
+            border: 1px solid rgba(255, 248, 248, 0.24);
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#searchInput:focus {
+    outline: none;
+}
+  #currentDateTime{
+    margin-top: 60px;
+            text-align: center;
+            font-size: 24px; 
+            
+           
+            color: white;
+            
+        }
+        p{
+            text-align: center;
+            
+            
+           
+            color: white;
+            
+        }
+button {
+    background-color: transparent;
+    color: #fff; 
+    border: none;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
+.logout-link {
+    color: red;
+    text-decoration: none; 
+}
+
+.logout-link:hover {
+    color: darkred;
+}
+
+    .profile-picture-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+table {
+            border-collapse: collapse;
+            width: 100%;
+            font-weight: normal;
+            
+        }
+
+        th, td {
+            border: 1px solid rgba(255, 248, 248, 0.24);
+            padding: 8px;
+            text-align: left;
+            color: white;
+            text-align: center;
+            font-weight: normal;
+        }
+
+        th {
+            background-color: rgba(143, 41, 41, 0.945);
+            color: white;
+            text-shadow: 2px 2px 4px black;
+        }
+        td {
+        color: white;
+        text-shadow: 0 0 20px black;
+        }
+
+
+
+
+
+
+.search-container {
+text-align: center;
+background-color: rgba(8, 8, 8, 0.7);
+
+}
+#searchInput {
+padding: 5px;
+width: 200px;
+background-color: rgba(8, 8, 8, 0.7);
+color: white;
+
+        }
+        #searchInput::placeholder {
+            color: white;
+        }
+
+.circular-img {
+        border-radius: 50%;
+        max-width: 180px;
+        height: auto;
+    }
+
+.exit-button {
+    margin-top: 20px;
+}
+.profile-link {
+    position: absolute;
+    left: 38px;
+}
+
+
+</style>
+</body>
+</html>

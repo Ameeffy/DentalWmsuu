@@ -1,0 +1,357 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css">
+    <title>Dental</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <style>
+       
+       link[rel="shortcut icon"] {
+            border-radius: 50%;
+        }
+        image {
+            border-radius: 50%;
+        }
+        
+   #searchInput {
+         border: 2px solid rgba(255, 248, 248, 0.24);
+        padding: 8px;
+        font-size: 16px;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        width: 200px;
+        background-color: transparent;
+        color: white;
+    }
+    .Move{
+             margin-top: 50px;
+             margin-left: 200px;
+             margin-right: 0px;}
+
+             .containera {
+    display: flex;
+    justify-content: right; 
+    align-items: center; 
+    
+}
+
+#searchInput:focus {
+    outline: none; 
+}
+
+    </style>
+</head>
+<body>
+<style>
+
+</style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <section class="HeaderSection">
+        <img src="{% static 'images/OIP1.JPG' %}" alt="logo" class="circular-imgs"> 
+        <p>UNIVERSITY HEALTH SERVICES CENTER</p>
+
+        <section class="right" style="display: flex; justify-content: center;"> <p>Welcome to Dental Clinic</p></section>
+    </section>
+    
+    <nav>
+        <ul>
+           
+            <h1 class="gradient-text">Dental Clinic</h1>
+
+            <h4 style="display: flex; justify-content: left; margin-left: 5px; margin-bottom: 0px; font-weight: normal;">General</h4>
+            <li><a href="{% url 'admin_Dashboard' %}"><i class="fas fa-columns"></i> Dashboard</a></li>
+
+            <li><a href="{% url 'admin_homesite' %}"><i class="fas fa-clipboard-list"></i> Assessment</a></li>
+            <li><a href="{% url 'appointment_list' %}"><i class="far fa-calendar-alt"></i> Appointment</a></li>
+            <li><a href="{% url 'dental_record' %}"><i class="fas fa-file-medical"></i> Dental Records</a></li>
+
+
+            <li style="cursor: pointer;" id="user-toggle"><i class="fas fa-user"> </i> Patient <span class="icon-after"></span></li>
+
+            <li id="student-link" style="display: none;"><a href="{% url 'admin_list' %}"><i class="fas fa-user-graduate"></i> Student</a></li>
+            <li id="faculty-staff-link" style="display: none;"><a href="{% url 'admin_listFaculty' %}"><i class="fas fa-users"></i> Faculty & Staff</a></li>
+            <li><a href="{% url 'admin_doctorsite' %}"><i class="fas fa-user-md"></i> Dental Staff</a></li>
+            
+            <li><a href="{% url 'supply_list' %}"><i class="fas fa-box"></i> Supplies</a></li>
+            
+            <li><a href="{% url 'admin_doctoravailability' %}"><i class="far fa-calendar-check"></i> Schedule</a></li>
+            <h4 style="display: flex; justify-content: left; margin-left: 5px; margin-bottom: 0px;font-weight: normal;">Settings</h4>
+
+            <li><a href="#"><i class="fas fa-question-circle"></i> Help and Support</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+
+            <li><a href="{% url 'LoginDentals' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+    <style>  .HeaderSection {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 1px;
+        left: 4px;
+        color: white;
+        width: calc(100% - 8px); 
+        background-color: rgb(44, 41, 41);
+        border: 1px solid rgba(255, 248, 248, 0.24);
+        
+        font-weight: lighter; 
+    }
+    .right {
+        margin-left: auto ; 
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        margin-right: 10px;
+    }
+    
+    .gradient-text {
+        font-size: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        background: linear-gradient(to right, #fff, #ff0000); 
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text; 
+        color: transparent; }
+        .icon-after {
+        margin-left: 5px; /* Adjust margin as needed */
+      }
+      i {
+        margin-right: 5px;
+      }
+      .circular-imgs {
+        border-radius: 50%;
+        max-width: 35px;
+        height: auto;
+        margin-right: 2px;
+    }nav {
+    margin-top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 100%; 
+    height: 100%; 
+    background-color: rgb(7, 7);
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    font-size: 15px;
+    border-right: 1px solid rgba(255, 248, 248, 0.24);
+    
+    
+}
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: flex;
+    justify-content: left; 
+            text-decoration: none;
+            color: #fff;
+            
+            transition: color 0.3s;
+            padding: 18px;
+            
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+}
+
+nav ul li a  {
+    text-decoration: none;
+    color: #fff;
+    
+    transition: color 0.5s;
+   
+    
+}
+nav li:hover{
+    color: red;
+}
+nav ul li a:hover {
+    color: red;
+}:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #b9b9b9;
+  background: linear-gradient(to left, rgb(29, 28, 28), rgb(14, 11, 11));
+}/* CSS for the table cell containing the form */
+td form {
+    margin: 0;
+}
+
+/* CSS for the submit button */
+td button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Hover effect for the submit button */
+td button:hover {
+    background-color: #45a049;
+}
+
+    </style>
+    
+      
+    <script>
+        document.getElementById('user-toggle').addEventListener('click', function() {
+            var studentLink = document.getElementById('student-link');
+            var facultyStaffLink = document.getElementById('faculty-staff-link');
+            
+            if (studentLink.style.display === 'none') {
+                studentLink.style.display = 'block';
+                facultyStaffLink.style.display = 'block';
+            } else {
+                studentLink.style.display = 'none';
+                facultyStaffLink.style.display = 'none';
+            }
+        });
+        document.getElementById('user-toggle').innerHTML += '<span class="icon-after">></span>';
+
+    </script>
+    
+    
+
+
+    <div class="Move">      
+        
+        <h1>Dental Records</h1>
+        <div class="containera">
+            <input type="text" id="searchInput" placeholder="Search...">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Appointment ID</th>
+                    <th>Extraction Record</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                {% for extraction_record in extraction_records %}
+                    <tr>
+                        <td>{{ extraction_record.appointment.user.first_name }} {{ extraction_record.appointment.user.last_name }}</td>
+                        <td>{{ extraction_record.appointment.appointment_id }}</td>
+                        <td>{{ extraction_record.extraction_record }}</td>
+                        <td>
+                            <form method="post" action="{% url 'extraction_record' appointment_id=extraction_record.appointment.appointment_id %}">
+
+                                {% csrf_token %}
+                                <button type="submit">View Extraction Record Form</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+       
+
+    
+
+        
+        
+   
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const tableBody = document.getElementById('tableBody');
+
+    searchInput.addEventListener('input', function() {
+        const searchQuery = this.value.toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (let row of rows) {
+            let found = false;
+            const cells = row.getElementsByTagName('td');
+            for (let cell of cells) {
+                if (cell.innerText.toLowerCase().includes(searchQuery)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    });
+</script>
+
+</div>
+<style> 
+  table {
+             border-collapse: collapse;
+             width: 100%;
+             border: 1px solid rgba(255, 248, 248, 0.24);
+             
+         }
+ 
+         th, td {
+             border: 1px solid rgba(255, 248, 248, 0.24);
+             padding: 8px;
+             text-align: left;
+             color: white;
+             text-align: center;
+             font-weight: bold;
+         }
+ 
+         th {
+             background-color: rgba(143, 41, 41, 0.945);
+             color: white;
+             text-shadow: 2px 2px 4px black;
+         }
+         td {
+         color: white;
+         text-shadow: 0 0 20px black;
+         }
+         h1 {
+            color: white;
+         }
+.logout-link {
+    color: red;
+    text-decoration: none; 
+}
+
+.logout-link:hover {
+    color: darkred;
+}
+
+
+
+
+
+
+
+
+
+
+</style>
+</body>
+</html>

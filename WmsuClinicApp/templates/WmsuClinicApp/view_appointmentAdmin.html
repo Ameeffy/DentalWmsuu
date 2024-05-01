@@ -1,0 +1,365 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet">
+    <title>View Appointment</title>
+</head>
+<body>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>   
+    <div class="center">
+        <button onclick="downloadPDF()">Download Appoinment Form</button>
+    </div>
+    <a href="{% url 'admin_homesite' %}" class="back-link">Back</a>  
+    <div class="lebron">   
+<div class="container" id="downloadable-content">
+    <form method="post" class="appointment-form">
+        <div class="header">
+            <div class="logo-container">
+                <img src="{% static 'images/logo.JPG' %}" alt="logo" class="logo">
+                <img src="{% static 'images/OIP.JPG' %}" alt="logos" class="logo">
+            </div>
+            <div class="header-content">
+                <p>Western Mindanao State University</p>
+<h3>UNIVERSITY HEALTH SERVICES CENTER</h3>
+<p class="city">Zamboanga City</p>
+<h3>UNIVERSITY DENTAL RECORD</h3>
+                
+                
+                
+                
+            </div>
+            <div class="profile-picture-container">
+                {% if user.profile.profile_picture %}
+                    <img class="profile-picture" src="{{ user.profile.profile_picture.url }}" alt="Profile Picture">
+                {% else %}
+                    <img class="profile-picture" src="{% static 'images/profile.JPG' %}" alt="Default Photo">
+                {% endif %}
+            </div>
+        </div>
+            {% csrf_token %}
+            <p>Profile Information</p> 
+            <table class="profile-info">
+                <tr>
+                    <td>Full Name:</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>ID Number:</td>
+                    <td>{{ profile.ID_Number }}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ user.email }}</td>
+                    
+                    <td>Contact Number:</td>
+                    <td>{{ profile.contact_number }}</td>
+                </tr>
+                <tr>
+                    <td>Date of Birth:</td>
+                    <td>{{ profile.date_of_birth }}</td>
+                    <td>Height and Weight:</td>
+                    <td>{{ profile.height_Centimeters }}CM   {{ profile.weight_Kilogram }}KG</td>
+                    
+                </tr>
+                
+                <tr>
+                    <td>Place of Birth:</td>
+                    <td>{{ profile.place_of_birth }}</td>
+                    <td>Religion:</td>
+                    <td>{{ profile.religion}}</td>
+                </tr>
+                <tr>
+                    <td>Home Address:</td>
+                    <td>{{ profile.home_address }}</td>
+                    <td>Civil Status:</td>
+                    <td>{{ profile.status_in_life }}</td>
+                </tr>
+                
+            </table>
+            <p2>Guardian Information</p2>
+            <table class="profile-infos">
+                <tr>
+                    <td>Full Name:</td>
+                    <td>{{ profile.parent_name }}</td>
+                    <td>Address:</td>
+                    <td>{{ profile.parent_address }}</td>
+                </tr>
+                <tr>
+                    <td>Contact Number:</td>
+                    <td>{{ profile.parent_telephone_number }}</td>
+                    <td>Relationship with Guardian:</td>
+                    <td>{{ profile.relationship }}</td>
+                </tr>    
+            </table>
+            <p2>Appointment Information</p2>
+            <table class="appointment-info">
+
+                <tr>
+                    <td>Appointment ID:</td>
+                    <td>{{ appointment.appointment_id }}</td>
+                  
+                    
+
+                </tr>
+                <tr>
+                    <td>Preferred Date:</td>
+                    <td>{{ appointment.preferred_date }}</td>
+                </tr>
+                <tr>
+                    <td>Preferred Time:</td>
+                    <td>{{ appointment.preferred_time }}</td>
+                </tr>
+                <tr>
+                    <td>Purpose:</td>
+                    <td>{{ appointment.purpose }}</td>
+                </tr>
+                <tr>
+                    <td>Comments or Any Allergy to MEDICINES:</td>
+                    <td>{{ appointment.comments }}</td>
+                </tr>
+                <tr>
+                    <td>Reference Number:</td>
+                    <td>{{ appointment.reference_number }}</td>
+                </tr>
+                <tr>
+                    <td>Created on:</td>
+                    <td>{{ appointment.current_date }}</td>
+                </tr>
+               
+                <tr>
+                    <td>Doctor:</td>
+                    <td>
+                    {% if appointment.doctor %}
+                        {{ appointment.doctor.name }}
+                    {% else %}
+                        No doctor assigned
+                    {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Assistant:</td>
+                    <td>
+                    {% if appointment.assistant %}
+                        {{ appointment.assistant.name }}
+                    {% else %}
+                        No assistant assigned
+                    {% endif %}
+                    </td>
+                </tr>
+             
+            </table>
+
+            
+    </form>
+</div>
+</div>
+
+
+
+<script>
+    function downloadPDF() {
+        
+        var container = document.getElementById('downloadable-content');
+      
+        var options = {
+            filename: 'Appoinment_Form.pdf',
+            image: { type: 'jpeg', quality: 2 },
+            html2canvas: { scale: 2, width: container.scrollWidth, height: container.scrollHeight },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        
+        html2pdf().from(container).set(options).save().then(() => {
+            console.log('PDF generated and opened successfully.');
+        });
+    }
+    </script>
+
+    <style>
+         .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        
+    }
+         .profile-infos {
+        table-layout: fixed;
+        margin: 0 auto;
+        max-width: 85%;
+        text-align: center;
+    }
+         a.back-link:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: #fff;
+}
+a.back-link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #faf7f7;
+            transition: all 0.3s ease; 
+        }
+        .lebron {
+    width: 840px;
+    height: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5); 
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); 
+}
+body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static "images/home.JPG" %}');
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        } 
+        .appointment-info{
+            table-layout: fixed;
+            margin: 0 auto;
+            width: 70%;
+            justify-content: center;
+            text-align: center;
+        }
+        p2 {
+        font-size: 21px; 
+        text-align: center;
+        padding-bottom: 10px;
+        padding-top: 20px;
+    }
+
+         p {
+            text-align: center;
+      
+        font-size: 21px; 
+    }
+    
+    p.city {
+        font-size: 18px;
+    }
+        .header { 
+    color: #0f0f0f;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    
+}
+
+    .logo-container,
+.header-content,
+.profile-picture-container {
+    display: inline-block;
+    vertical-align: middle;
+    
+}
+
+.logo {
+    width: 95px; 
+    height: 95px; 
+    border-radius: 50%;
+}
+
+.header-content {
+    position: relative;
+    left: -39.7px;
+    text-align: center;
+}
+
+.profile-picture {
+    width: 120px; 
+    height: 120px; 
+    border: 1px solid black; 
+    padding: 2px;
+    
+}
+
+ 
+.appointment-form {
+    width: 794px;
+    height: 1123px;
+
+}
+.container {
+    width: 794px;
+    height: 1123px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: black;
+    text-align: center;
+}
+
+table {
+    border: white;
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: white;
+ 
+    border: 1px solid #ddd;
+    font-size: small;
+}
+
+th, td {
+    border: white;
+        padding: 8px;
+        text-align: left;
+        
+        text-align: center;
+       
+
+    max-width: 300px;
+    word-wrap: break-word; 
+
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+    </style>
+
+</body>
+</html>

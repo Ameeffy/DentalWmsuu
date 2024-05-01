@@ -1,0 +1,208 @@
+<!-- appointmentextraction_details.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Extraction Details</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
+    <style>
+        body {
+            background-color: #27ce80; /* light green */
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        h3, h4, h1 {
+            font-weight: bold;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 80%;
+            text-align: center;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            
+        }
+        th {
+            background-color: #f2f2f28e; /* light gray */
+        }
+    </style>
+    <style>
+    
+        .swal2-popup {
+            background-color: #131010d3; 
+        }
+    
+        .swal2-title {
+            color: #ffffff; 
+        }
+    
+        .swal2-content {
+            color: #ffffff; 
+        }
+    
+       
+        .swal2-confirm {
+            background-color: #28a745 !important; 
+            color: #ffffff !important; 
+        }
+    
+        /* Styling for the cancel button */
+        .swal2-cancel {
+            background-color: #dc3545 !important; 
+            color: #ffffff !important; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="downloadable-content">
+        <h3>Western Mindanao State University</h3>
+        <h4>Zamboanga City</h4>
+        <h1>DENTAL CHART</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Patient Name</th>
+                    <th>Appointment ID</th>
+                    <th>Date</th>
+                    <th>Treatment Given</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ appointment.user.first_name }} {{ appointment.user.last_name }}</td>
+                    <td>{{ appointment.appointment_id }}</td>
+                   
+                    <td>
+                       
+                            {% for record in extraction_records %}
+                               {{ record.extraction_datetime }}
+                            {% endfor %}
+                        
+                    </td>
+                    <td>
+                       
+                        {% for record in extraction_records %}
+                            {{ record.extraction_record }}
+                        {% endfor %}
+                    
+                </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+    <div style="text-align: center;" class="button-container">
+        <button onclick="downloadPDF()">Print PDF</button>
+        <button type="button" onclick="redirectToDentalRecord()" class="done-button">
+            <i class="fas fa-arrow-left"></i> Back to Dental Record
+        </button>
+    </div><script>
+        function downloadPDF() {
+            var container = document.getElementById('downloadable-content');
+            var originalWidth = container.style.width;
+            var originalHeight = container.style.height;
+            
+            container.style.width = '450px';
+            container.style.height = '1000px';
+            container.style.backgroundColor = 'transparent'; // Set container background color to transparent
+        
+            var options = {
+                filename: 'Extraction.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas: { scale: 2 },
+                jsPDF: { 
+                    unit: 'px', 
+                    format: 'a4', 
+                    orientation: 'portrait'
+                }
+            };
+        
+            // Create a new div for the background rectangle
+            var backgroundRect = document.createElement('div');
+            backgroundRect.style.position = 'absolute';
+            backgroundRect.style.top = '0';
+            backgroundRect.style.left = '0';
+            backgroundRect.style.width = '100%';
+            backgroundRect.style.height = '100%';
+            backgroundRect.style.backgroundColor = '#27ce80'; // Set background color
+            backgroundRect.style.zIndex = '-1'; // Make it behind all other content
+            container.insertBefore(backgroundRect, container.firstChild); // Insert it as the first child of the container
+        
+            // Generate PDF
+            html2pdf().from(container).set(options).save().then(() => {
+                console.log('PDF generated and downloaded successfully.');
+                container.style.width = originalWidth;
+                container.style.height = originalHeight;
+                container.style.backgroundColor = 'transparent'; // Reset container background color
+                container.removeChild(backgroundRect); // Remove the background rectangle
+            });
+        }
+        </script><script>
+        function redirectToDentalRecord() {
+            window.location.href = "{% url 'dental_record' %}";
+        }
+    </script>
+    <style>button {
+        margin-top: 20px;
+    border: 2px solid rgb(41, 134, 41);
+    background-color: #1d251d94;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}
+.done-button {
+            background-color:rgb(41, 134, 41);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    
+        .done-button:hover {
+            background-color:  #45a049;
+        }
+    </style>
+        
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
+    <style>
+        .swal-title {
+            color: white !important;
+        }
+        
+        .swal-text {
+            color: white !important;
+        }
+    </style>
+    
+</body>
+</html>

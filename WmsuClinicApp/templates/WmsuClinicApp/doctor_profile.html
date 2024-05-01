@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+</head>
+<body>
+    <div class="back-link" style="position: absolute; top: 10px; left: 10px;">
+        <a href="{% url 'admin_doctorsitelist' %}">
+            <i class="fas fa-chevron-circle-left" style="top: 23px; margin-left: 5px; color: rgb(2, 2, 2); font-size: 30px;"></i>
+        </a>
+    </div>
+    <div class="container">
+        <div class="columns-wrapper">
+            <div class="column">
+                <h4><i class="fas fa-user"></i>
+                    <span>
+                        Doctor's Profile
+                    </span>
+                </h4>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <span>{{ doctor.name }}</span>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-user-md"></i>
+                    <span>{{ doctor.specialization }}</span>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-birthday-cake"></i>
+                    <span>{{ doctor.birthday }}</span>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-home"></i>
+                    <span>{{ doctor.address }}</span>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-heart"></i>
+                    <span>{{ doctor.civil_status }}</span>
+                </div>
+                </div>
+                
+                <div class="column">
+                    <h4><i class="fas fa-user-graduate"></i> Educational Background</h4>
+                    <div class="input-group">
+                        <i class="fas fa-school"></i>
+                        <span>{{ doctor.secondary_high_school }}</span>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-university"></i>
+                        <span>{{ doctor.college }}</span>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-user-md"></i>
+                        <span>{{ doctor.pre_med }}</span>
+                    </div>
+                    
+                </div>
+            </div>
+            <style>
+                .action-form {
+                    display: inline-block;
+                    margin-right: 10px;
+                }
+            
+                .action-form button {
+                    background-color: #dc3545; 
+                    color: white;
+                    padding: 5px 10px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+            
+                .action-form button:hover {
+                    background-color: #bd2130; 
+                }
+            
+                .resign-button {
+                    background-color: #ffc107; 
+                }
+            
+                .resign-button:hover {
+                    background-color: #e0a800; 
+                }
+            </style>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <br><br>
+            <h4>Action</h4>
+           
+            <div class="action-form">
+                <form id="retire-form" action="{% url 'retire_doctor' doctor.Doctor_id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="button" onclick="confirmRetirement()" name="status" value="Retired">
+                        <i class="fas fa-user-slash"></i> Retire
+                    </button>
+                </form>
+            </div>
+            
+            <div class="action-form">
+                <form id="resign-form" action="{% url 'resign_doctor' doctor.Doctor_id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="button" onclick="confirmResignation()" class="resign-button" name="status" value="Resign">
+                        <i class="fas fa-user-times"></i> Resign
+                    </button>
+                </form>
+            </div>
+            
+            
+            <script>
+                function confirmRetirement() {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "The doctor will be retiring!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc3545',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Yes, retire it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'Retired!',
+                                'The doctor has been retired successfully.',
+                                'success'
+                            ).then(() => {
+                    document.getElementById('retire-form').submit();
+                        
+                    });
+                }
+            });
+    }
+            
+                function confirmResignation() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "The doctor will be resigning!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ffc107',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, resign it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Resigned!',
+                    'The doctor has been resigned successfully.',
+                    'success'
+                ).then(() => {
+                    document.getElementById('resign-form').submit();
+                });
+            }
+        });
+    }
+            </script>
+            
+            
+            <style>
+    
+                .swal2-popup {
+                    background-color: #131010d3; 
+                }
+            
+                .swal2-title {
+                    color: #ffffff; 
+                }
+            
+                .swal2-content {
+                    color: #ffffff; 
+                }
+            
+               
+                .swal2-confirm {
+                    background-color: #28a745 !important; 
+                    color: #ffffff !important; 
+                }
+            
+                
+                .swal2-cancel {
+                    background-color: #dc3545 !important; 
+                    color: #ffffff !important; 
+                }
+            </style>
+            <style>
+       
+                *,
+        *:before,
+        *:after {
+          box-sizing: border-box;
+        }
+        body {
+          padding: 1em;
+          font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+          font-size: 15px;
+          color: #050404;
+          background-color: #e3e3e3;
+        }
+             h4{
+                color: #DC143C;
+             }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; 
+            margin-top: 30px;
+        }
+        
+        .columns-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group i::after {
+            content: "|";
+            margin-left: 10px;
+            font-size: 16px;
+            display: inline; 
+            max-width: 15px;
+            text-align: center; 
+            box-sizing: border-box;
+        }
+        
+        
+        .input-group {
+          flex-direction: column;
+                align-items: stretch;
+                border: none;
+                padding: 0;
+                margin-bottom: 20px;
+            border: 1px solid #ccb3b3f6;
+            padding: 7px;
+            width: 70%;
+            
+        }
+        
+        .input-group i {
+            margin-right: 10px;
+            padding-right: 10px;
+             
+            display: inline-block; 
+            width: 20px; 
+            font-size: 18px; 
+            margin-right: 10px; 
+            text-align: center; 
+            box-sizing: border-box; 
+            color: rgb(141, 11, 37);
+        }
+        .input-group span {
+            margin-left: 10px;
+            
+        }  
+        @media screen and (max-width: 768px) {
+            .columns-wrapper {
+                flex-direction: column;
+            }
+        
+            .column {
+                width: 100%;
+            }
+        
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 4px;
+                margin-bottom: 20px;
+            }
+            
+            .input-group span {
+            margin-left: 10px;
+            
+        } 
+        }
+        </style>  
+</body>
+</html>
+
+            

@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Staff</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <section class="HeaderSection">
+        <img src="{% static 'images/OIP1.JPG' %}" alt="logo" class="circular-imgs"> 
+        <p>UNIVERSITY HEALTH SERVICES CENTER</p>
+
+        <section class="right" style="display: flex; justify-content: center;"> <p>Welcome to Dental Clinic</p></section>
+    </section>
+    
+    <nav>
+        <ul>
+           
+            <h1 class="gradient-text">Dental Clinic</h1>
+
+            <h4 style="display: flex; justify-content: left; margin-left: 5px; margin-bottom: 0px; font-weight: normal;">General</h4>
+            <li><a href="{% url 'admin_Dashboard' %}"><i class="fas fa-columns"></i> Dashboard</a></li>
+
+            <li><a href="{% url 'admin_homesite' %}"><i class="fas fa-clipboard-list"></i> Assessment</a></li>
+            <li><a href="{% url 'appointment_list' %}"><i class="far fa-calendar-alt"></i> Appointment</a></li>
+            <li><a href="{% url 'dental_record' %}"><i class="fas fa-file-medical"></i> Dental Records</a></li>
+            <li style="cursor: pointer;" id="user-toggle"><i class="fas fa-user"> </i> Patient <span class="icon-after"></span></li>
+
+            <li id="student-link" style="display: none;"><a href="{% url 'admin_list' %}"><i class="fas fa-user-graduate"></i> Student</a></li>
+            <li id="faculty-staff-link" style="display: none;"><a href="{% url 'admin_listFaculty' %}"><i class="fas fa-users"></i> Faculty & Staff</a></li>
+            <li><a href="{% url 'admin_doctorsite' %}"><i class="fas fa-user-md"></i> Dental Staff</a></li>
+            <li><a href="{% url 'supply_listhome' %}"><i class="fas fa-box"></i> Supplies</a></li>
+            
+            <li><a href="{% url 'admin_doctoravailability' %}"><i class="far fa-calendar-check"></i> Schedule</a></li>
+            <h4 style="display: flex; justify-content: left; margin-left: 5px; margin-bottom: 0px;font-weight: normal;">Settings</h4>
+
+            <li><a href="#"><i class="fas fa-question-circle"></i> Help and Support</a></li>
+            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+
+            <li><a href="{% url 'LoginDentals' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav><script>
+        document.getElementById('user-toggle').addEventListener('click', function() {
+            var studentLink = document.getElementById('student-link');
+            var facultyStaffLink = document.getElementById('faculty-staff-link');
+            
+            if (studentLink.style.display === 'none') {
+                studentLink.style.display = 'block';
+                facultyStaffLink.style.display = 'block';
+            } else {
+                studentLink.style.display = 'none';
+                facultyStaffLink.style.display = 'none';
+            }
+        });
+        document.getElementById('user-toggle').innerHTML += '<span class="icon-after">></span>';
+
+    </script>
+    <style>  .HeaderSection {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 1px;
+        left: 4px;
+        color: white;
+        width: calc(100% - 8px); 
+        background-color: rgb(44, 41, 41);
+        border: 1px solid rgba(255, 248, 248, 0.24);
+        
+        font-weight: lighter; 
+    }
+    .right {
+        margin-left: auto ; 
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        margin-right: 10px;
+    }
+    
+    .gradient-text {
+        font-size: 30px;
+        margin-left: 5px;
+        margin-right: 5px;
+        background: linear-gradient(to right, #fff, #ff0000); 
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text; 
+        color: transparent; }
+        .icon-after {
+        margin-left: 5px; /* Adjust margin as needed */
+      }
+      i {
+        margin-right: 5px;
+      }
+      .circular-imgs {
+        border-radius: 50%;
+        max-width: 35px;
+        height: auto;
+        margin-right: 2px;
+    }nav {
+    margin-top: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 100%; 
+    height: 100%; 
+    background-color: rgb(7, 7);
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+    font-size: 15px;
+    border-right: 1px solid rgba(255, 248, 248, 0.24);
+    
+    
+}
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: flex;
+    justify-content: left; 
+            text-decoration: none;
+            color: #fff;
+            
+            transition: color 0.3s;
+            padding: 18px;
+            
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+}
+
+nav ul li a  {
+    text-decoration: none;
+    color: #fff;
+    
+    transition: color 0.5s;
+   
+    
+}
+nav li:hover{
+    color: red;
+}
+nav ul li a:hover {
+    color: red;
+}:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #b9b9b9;
+  background: linear-gradient(to left, rgb(29, 28, 28), rgb(14, 11, 11));
+}
+.Move{
+            margin-top: 60px;
+            margin-left: 200px;
+            margin-right: 0px;}
+           
+    </style>
+    <style>
+            .logout-link {
+    color: red;
+    text-decoration: none; 
+}
+
+.logout-link:hover {
+    color: darkred;
+}
+
+
+
+
+
+
+
+    table {
+            border-collapse: collapse;
+            width: 100%;
+            border-right: 1px solid rgba(255, 248, 248, 0.24);
+            
+        }
+
+        th, td {
+            border-right: 1px solid rgba(255, 248, 248, 0.24);
+            padding: 8px;
+            text-align: left;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            width: 10%;
+        }
+
+        th {
+            background-color: rgba(143, 41, 41, 0.945);
+            color: white;
+            text-shadow: 2px 2px 4px black;
+        }
+        td {
+        color: white;
+        text-shadow: 0 0 20px black;
+        }.dental-staff-link {
+    display: flex;
+    justify-content:center;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid rgb(90, 3, 21);
+    width: 150px;
+}
+
+.dental-staff-link:hover {
+    
+    border-color: #8B0000; 
+}
+
+            </style>
+
+<div class="Move"> 
+    
+    <a class="dental-staff-link" href="{% url 'admin_doctorsitelist' %}">Dental Staff List</a>
+
+
+    
+<h1 style="color: #fff;">Today's Duty</h1>
+    <h2>Doctors</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Specialization</th>
+               
+                <th>Status</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+                {% if doctor.status == 'On Duty' %}
+                <tr>
+                    <td>{{ doctor.name }}</td>
+                    <td>{{ doctor.specialization }}</td>
+                    <td>{{ doctor.status }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Assistants</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Status</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for assistant in assistants %}
+                {% if assistant.status == 'On Duty' %}
+                <tr>
+                    <td>{{ assistant.name }}</td>
+                    <td>{{ assistant.role }}</td>
+                    <td>{{ assistant.status }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<style>
+      a.back-link {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #dc3545;
+    border-right: 1px solid rgba(255, 248, 248, 0.24);
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+a.back-link:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: #fff;
+}
+
+    .action-button {
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+    }
+
+    .red {
+        background-color: red;
+    }
+
+    .green {
+        background-color: green;
+    }
+
+    .action-button.red:hover {
+        background-color: darkred;
+    }
+
+    .action-button.green:hover {
+        background-color: darkgreen;
+    }
+
+
+    h2 {
+        color: white;
+    }
+</style>
+</body>
+</html>

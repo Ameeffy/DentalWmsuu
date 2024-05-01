@@ -1,0 +1,171 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Type</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        $(document).ready(function () {
+           
+            $(".registration-form:first").click(function () {
+                window.location.href = "{% url 'register' %}";
+            });
+
+           
+            $(".registration-forma:last").click(function () {
+                window.location.href = "{% url 'register_faculty' %}";
+            });
+        });
+    </script>
+<style>
+  
+body {
+  
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  background: linear-gradient(to right, rgb(80, 22, 22), rgb(43, 3, 3));
+}
+
+    #container {
+        text-align: center;
+        margin: 50px auto;
+    }
+
+    h1 {
+        color: #fffdfd;
+    }
+
+    @keyframes slideFromLeft {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideFromRight {
+        0% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .registration-form {
+        display: inline-block;
+        margin: 20px;
+        width: calc(50% - 40px); /* Adjusted width for responsive design */
+        max-width: 500px; /* Maximum width for larger screens */
+        height: 400px; /* Adjusted height for PC view */
+       ;
+        border: 2px solid #f7f6f6;
+        border-radius: 5px;
+        background-image: url('../../static/images/aaa.jpg');
+        background-size: cover;
+        background-position: center;
+        animation: slideFromLeft 1s ease forwards;
+    }
+
+    .registration-forma {
+        display: inline-block;
+        margin: 20px;
+        width: calc(50% - 40px); /* Adjusted width for responsive design */
+        max-width: 500px; /* Maximum width for larger screens */
+        height: 400px; /* Adjusted height for PC view */
+       
+        border: 2px solid #f7f6f6;
+        border-radius: 5px;
+        background-image: url('../../static/images/aa.jpg');
+        background-size: cover;
+        background-position: center;
+        animation: slideFromRight 1s ease forwards;
+    }
+
+    .registration-link {
+        text-decoration: none;
+        color: #fff;
+        background-color: #b81e2b;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .registration-link:hover {
+        background-color: #b81e2b;
+    }
+
+    #container {
+        text-align: center;
+        margin: 50px auto;
+    }
+
+    a.back-link {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 10px;
+        text-decoration: none;
+        color: #fff;
+        background-color: rgb(189, 5, 5);
+        border: 1px solid #dc3545;
+        border-radius: 4px;
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    a.back-link:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+        color: #fff;
+    }
+
+    /* Media query for responsive design */
+    @media only screen and (max-width: 768px) {
+        .registration-form,
+        .registration-forma {
+            width: calc(100% - 40px); /* Full width on smaller screens */
+            height: 300px; /* Adjusted height for mobile view */
+            margin: 10px; /* Adjusted margin for smaller screens */
+        }
+    }
+</style>
+
+
+</head>
+<body>
+    <div class="back-link" style="margin-top: 45px; margin-bottom: 10px; left: 1px; z-index: 9999;">
+        <a href="{% url 'my_login' %}">
+            <i class="fas fa-chevron-circle-left" style="font-size: 40px; color: rgb(255, 255, 255);"></i>
+        </a>
+    </div>
+    <div id="container">
+        
+        
+        <form class="registration-form">
+            <a href="{% url 'register' %}" class="registration-link">
+                Student Registration
+            </a>
+        </form>
+    
+        <form class="registration-forma">
+            <a href="{% url 'register_faculty' %}" class="registration-link">
+                Faculty and Staff Registration
+            </a>
+        </form>
+        
+    </div>
+    
+</body>
+</html>

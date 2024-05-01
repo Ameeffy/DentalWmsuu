@@ -1,0 +1,566 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css">
+    <title>Login</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <style>
+
+
+body, h1, p {
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('../../static/images/login.jpg'); 
+        background-size: cover; 
+        background-attachment: fixed; 
+        position: relative; 
+        margin-top: 0px; 
+        background-repeat: no-repeat;
+    }
+    body::after {
+            content: "";
+            background-color: rgba(8, 8, 8, 0.041); 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+        }
+    .blur {
+        filter: blur(3px);
+    }
+
+form {
+    position: relative;
+    
+    
+    max-width: 100%;
+    max-height: 100%;
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid #dc3545;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.541);
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.185);
+    
+}
+
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    label {
+        margin-top: 10px;
+        display: -webkit-inline-flex;
+        
+        padding: 1px;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: rgb(250, 247, 247);
+        
+    }
+    
+    .fieldWrapper label i {
+    margin-right: 10px;
+    color: #f05353;
+    font-size: x-large;
+    margin-bottom: 10px;
+}
+
+    
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        height: 30px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        
+        border-radius: 5px;
+        text-align: center;
+        border: 2px solid  #dc3546c0;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.425);
+        
+        
+        
+        
+    }
+
+    button[type="submit"] {
+       
+        
+        background-color: rgb(173, 3, 3);
+        color: white;
+        padding: 10px 15px;
+        border: 1px solid red;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 50%;
+        position: relative;
+        left: 10px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: rgb(163, 23, 23);
+    }
+   
+    
+    @media only screen and (max-width: 1600px) {
+        
+    }
+
+    @media only screen and (max-width: 1280px) {
+        
+    }
+
+    @media only screen and (max-width: 768px) {
+        form {
+    position: relative;
+    
+    
+    max-width: 100%;
+    max-height: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #dc3545;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    margin-top: 60px;
+    
+}
+    }
+
+
+    img {
+         max-width: 100%;
+    height: auto;
+    }
+    .error-message {
+        color: #ff3b4f;
+        margin-top: 10px;
+        border: 1px solid #dc3545;     
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #16070785;
+        margin-bottom: 25px;
+    }
+ul.errorlist.nonfield {
+    display: none;
+    background-color: #f3585d;
+    
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    
+}
+.logo-container {
+        border-radius: 50%; 
+        overflow: hidden;
+    }
+
+    .circular-img {
+        border-radius: 50%;
+        max-width: 70px;
+        height: auto;
+    }
+.center-content {
+    text-align: center;
+}
+.Navmain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1d1818d7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: medium;
+}
+
+.Navleft {
+  display: flex;
+  align-items: center;
+  color: white;
+  
+}.Navleft p {
+  display: flex;
+  justify-content: column;
+  align-items: center;
+  color: white;
+}
+
+
+.Navleft p {
+    margin: 0 10px;
+    background: linear-gradient(45deg, #f37c7c 0%, #f9bdbd 99%, #f75050 100%);
+    -webkit-background-clip: text; 
+    background-clip: text;
+    color: transparent; 
+}
+
+
+.Navcenter ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.Navcenter ul li {
+  margin-right: 20px;
+}
+
+.Navcenter ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.Navcenter ul li a:hover {
+  color: red;
+}
+.Navright{
+    margin-right: 100px;
+}
+.Navright ul {
+  list-style-type: none;
+  display: flex;
+}
+
+.Navright ul li a {
+    text-decoration: none;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 20px; 
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.Navright ul li a#logins {
+    background-image: linear-gradient(45deg, #09a824 0%, #1faa80 99%, #06f8a7 100%);
+}
+
+.Navright ul li a#login {
+    background-image: linear-gradient(45deg, #ec050d 0%, #e76250 99%, #d8a39c 100%);
+}
+@media screen and (max-width: 768px)
+
+{
+.Navmain {
+    display: inline-block; 
+    justify-content: center;
+    justify-items: center;
+}
+.Navleft p{
+    font-size: 15px;
+}
+
+  .Navright {
+    margin-right: 0; 
+    margin-left: 200px; 
+  }
+
+  .Navcenter ul li {
+    margin-right: 10px;
+  }
+}
+.back-to-home {
+    position: fixed;
+    top: 90px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    background: url('../../static/images/back.png') no-repeat center;
+    background-size: contain;
+    display: block;
+    z-index: 9999; 
+}
+
+
+.back-to-home a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.back-to-home:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+  
+    <div class="back-to-home"> <a href="{% url '' %}"> </a></div>
+    <nav class="Navmain">
+        <nav class="Navleft">
+            <img src="{% static 'images/OIP1.JPG' %}" alt="logo" class="circular-img">
+            <p>UNIVERSITY HEALTH SERVICES CENTER</p>
+        </nav>
+        <nav class="Navcenter">
+            <ul>
+                
+            </ul>
+        </nav>
+        <nav class="Navright">
+            <ul>
+                <li><a id="login" href="{% url 'admin_login' %}">Admin</a></li>
+                <li><a id="logins" href="{% url 'LoginDentals' %}">Dental</a></li>
+               
+            </ul>
+        </nav>
+    </nav>
+       
+    <style> #blocked-account-message {
+        color: #ff3b4f;
+        margin-top: 10px;
+        border: 1px solid #dc3545;     
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #16070785;
+        margin-bottom: 25px;
+    }</style>
+   
+        <div class="container">
+            <div class="center-content">
+                <form method="POST" autocomplete="off">
+                    <h1 style="margin-top: -5px;
+                    margin-bottom: 25px;
+                    display: flex;
+                    justify-content: left;
+                    background: linear-gradient(to right, red, white, red); /* Standard syntax */
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;">Login</h1>
+                    {% if error_message %}
+                        <p class="error-message">{{ error_message }} </p>
+                    {% endif %}
+                    
+                    {% csrf_token %}
+                    
+                 
+                   
+
+                    {{ loginform.non_field_errors }}
+                    <div class="fieldWrapper">
+                        {% if loginform.is_bound and loginform.is_valid %}
+                            {% if user %}
+                                {% if user.profile.status == 'Blocked' %}
+                                <script>
+                                    Swal.fire({
+                                        title: 'Account Blocked',
+                                        text: 'Your account is blocked. Please contact the WMSU Dental Clinic Administrator.',
+                                        icon: 'error',
+                                        confirmButtonText: 'OK',
+                                        customClass: {
+                                            popup: 'custom-swal2-popup',
+                                            title: 'custom-swal2-title',
+                                            content: 'custom-swal2-content',
+                                            confirmButton: 'custom-swal2-confirm-button'
+                                        }
+                                    });
+                                </script>
+                                
+                                <style>
+                                    
+                                    .custom-swal2-popup {
+                                        backdrop-filter: blur(8px); 
+                                        background-color: rgba(12, 11, 11, 0.644); 
+                                        
+                                    }
+                                
+                                    .custom-swal2-title {
+                                        color: #ffffff; 
+                                    }
+                                    .custom-swal2-content{
+                                        color: #ffffff; 
+                                       
+                                    }
+                                
+                                    .custom-swal2-confirm-button {
+                                        background-color: #f70000a8 !important; 
+                                        color: #ffffff !important;  
+                                        border: none;
+                                    }
+                                </style>
+                                
+                                {% else %}
+                                <script>
+                                    Swal.fire({
+                                        title: 'Logged In Successfully',
+                                        text: 'You are now successfully logged in',
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                        timer: 2500,
+                                        background: 'rgba(0, 0, 0, 0.3) ', 
+                                        iconColor: '#28a745', 
+                                        customClass: {
+                                            popup: 'custom-swal2-popup',
+                                            title: 'custom-success-swal2-title',
+                                            content: 'custom-swal2-content',
+                                            htmlContainer: 'custom-success-swal2-html-container'
+                                            
+                                        },
+                                        onClose: function() {
+                                            window.location.href = "{% url 'WmsuDentalhomepage' %}";
+                                        }
+                                    });
+                                </script>
+                                
+                                <style>
+                                   
+                                    .custom-swal2-popup {
+                                        backdrop-filter: blur(8px); 
+                                        background: rgba(0, 0, 0, 0.219); 
+                                        
+                                    }
+                                    /* Custom styles for the success SweetAlert dialog */
+                                    .custom-success-swal2-title {
+                                        margin-top: 20px;
+                                        color: #ffffff; /* Set the title color to black */
+                                    }
+                                    .custom-swal2-content{
+                                        color: #ffffff; 
+                                       
+                                    }
+                                
+                                    .custom-success-swal2-html-container {
+                                        color: #ffffff; /* Set the content text color to black */
+                                    }
+                                </style>
+                                
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    
+                 
+                    
+                       
+{% if loginform.username.errors or loginform.password.errors %}
+<div class="mali">
+    {{ loginform.username.errors }}
+    {{ loginform.password.errors }}
+</div>
+{% endif %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">                    
+
+                        <label for> <i class="fa fa-user"></i>{{ loginform.username }}</label>
+                        
+                    </div>
+                    <div class="fieldWrapper">
+                        
+                        <label for><i class="fa fa-key"></i>{{ loginform.password }}</label>
+                        
+                    </div> 
+                    <a href="{% url 'forgot_password' %}" style="text-decoration: none;">
+                        <h6 style="display: flex;justify-content: left;color: white; margin-top: -10px;">forgot password?</h6>
+                    </a>
+                    
+                    <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+
+                    <div style="display: flex;">
+                        <h5 style="color: white; margin-right: 1px;">Don't have an account?</h5>
+                        <a href="{% url 'select_user_type' %}" style="color: rgb(243, 87, 87); text-decoration: none;">
+                            <h5>Signup now</h5>
+                        </a>
+                        
+                    </div>
+                    
+                </form>
+
+                
+
+                
+
+            
+            </div> 
+                
+            </div>
+</body>
+
+
+<style>
+    #access-granted-message {
+        background-color: #05501173;
+        border: 2px solid rgb(7, 197, 7);
+        color: rgb(9, 226, 28);
+        position: relative;
+        padding: 10px 40px; /* Increased padding to accommodate loader */
+        margin-top: 10px;
+        margin-bottom: 25px;
+        border-radius: 5px;
+        opacity: 0; 
+        animation: fadeIn 0.5s forwards; 
+        
+        /* Added margin-left to create space for loader */
+        margin-right: 50px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Loading animation */
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #31c514;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+        position: absolute; /* Changed to absolute */
+        right: -45px; /* Adjusted left position */
+        top: 0%;
+        transform: translateY(-50%);
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<style>.mali {
+    color: #ff3b4f;
+    margin-top: 10px;
+    border: 1px solid #dc3545;     
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #16070785;
+    margin-bottom: 25px;
+    text-decoration: none;
+}
+ul.errorlist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+</style>
+</html>

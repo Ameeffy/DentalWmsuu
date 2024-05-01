@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css">
+    <title>Appointment User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <style>
+       body{
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, rgb(80, 22, 22), rgb(71, 1, 1));
+       }
+ 
+.containera {
+    text-align: center;
+    padding: 20px; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; 
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #131111;
+    font-weight: normal;
+}
+
+td {
+    text-align: left;
+    font-weight: normal;
+}
+
+p {
+    margin-top: 10px; /* Adjust margin as needed */
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+.dayum {
+   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    width: calc(40% - 20px);
+    
+    margin: 0 auto; 
+}
+td a {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9ea;
+}
+
+
+td a:hover {
+    background-color: #e0e0e0;
+}
+@media screen and (max-width: 768px) {
+    .dayum {
+       
+        justify-content: flex-start; 
+        width: 100%; 
+        margin-right: 10px;
+    }
+}
+          
+    </style>
+</head>
+<body>
+    <style>.circular-imga {
+        border-radius: 50%;
+        max-width: 100px;
+        height: auto;
+        align-items: center;
+        margin-right: 10px;
+    }</style>
+    <div class="back-link" style="margin-top: 45px; margin-bottom: 10px; left: 1px; z-index: 9999;">
+        <a href="{% url 'WmsuDentalhomepage' %}">
+            <i class="fas fa-chevron-circle-left" style="font-size: 40px; color: rgb(255, 255, 255);"></i>
+        </a>
+    </div>
+    
+   
+    <div class="containera">      
+        <img src="{% static 'images/logo1.JPG' %}" alt="logo" class="circular-imga">
+        <img src="{% static 'images/OIP1.JPG' %}" alt="logo" class="circular-imga"> 
+        <h1 style="color: white;">{{ profile.user.username }} Appointment History</h1>
+    </div>
+    <div class="dayum">
+    {% if appointments %}
+    {% for appointment in appointments %}
+        <p><strong>Appointment ID:</strong> {{ appointment.appointment_id }}</p>
+        <p><strong>Appointment Date:</strong> {{ appointment.current_date }}</p>
+        <p><strong>Status:</strong> {{ appointment.status }}</p>
+    
+        <table>
+            <tr>
+                <th>Schedule</th>
+                <th>Purpose</th>
+                <th>View</th>
+            </tr>
+            <tr>
+                <td>{{ appointment.preferred_date }} {{ appointment.preferred_time }}</td>
+                <td>{{ appointment.purpose }}</td>
+                <td>
+                    <a href="{{ appointment.cor_upload.url }}" target="_blank">File</a><br><br>
+                    <a href="#" onclick="viewAppointment('{{ appointment.appointment_id }}')">Form</a>
+                </td>
+            </tr>
+        </table>
+        <br><br>
+    {% endfor %}
+    {% else %}
+        <p>No appointments.</p>
+    {% endif %}
+</div>
+
+
+
+
+
+    <script>
+        function viewAppointment(appointmentId) {
+    
+    window.location.href = "/view_appointmentProfile/" + appointmentId + "/"; 
+}
+</script>
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const tableBody = document.getElementById('tableBody');
+
+    searchInput.addEventListener('input', function() {
+        const searchQuery = this.value.toLowerCase();
+        const rows = tableBody.getElementsByTagName('tr');
+
+        for (let row of rows) {
+            let found = false;
+            const cells = row.getElementsByTagName('td');
+            for (let cell of cells) {
+                if (cell.innerText.toLowerCase().includes(searchQuery)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        }
+    });
+</script>
+    
+    
+    
+</body>
+</html>

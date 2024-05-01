@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css">
+    <title>Recent Appointment </title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+<div class="back-link" style="margin-top: 45px; margin-bottom: 10px; left: 1px; z-index: 9999;">
+    <a href="{% url 'WmsuDentalhomepage' %}">
+        <i class="fas fa-chevron-circle-left" style="font-size: 40px; color: rgb(255, 255, 255);"></i>
+    </a>
+</div>
+
+{% if last_appointment %}
+<div class="Size">
+<div class="Container">
+    <img src="{% static 'images/logo1.JPG' %}" alt="logo" class="circular-imga">
+    <img src="{% static 'images/OIP1.JPG' %}" alt="logo" class="circular-imga"> 
+    <h2 style="display: flex; justify-content: center;"><strong>Appointment Information</strong></h2>
+       <p><strong>Appointment ID: </strong> {{ last_appointment.appointment_id }}</p>
+       <p><strong>Appointment Date: </strong>{{ last_appointment.current_date }}</p>
+       <p><strong>Status: </strong>{{ last_appointment.status }}</p>
+       <br>
+       <p><strong>Preferred date and time: </strong>{{ last_appointment.preferred_date }}, {{ last_appointment.preferred_time }} </p>
+       <p><strong>Purpose: </strong>{{ last_appointment.purpose }}</p>
+       <p><strong>Comments or Any Allergy to MEDICINES: </strong> {{ last_appointment.comments }}</p>
+       <p><strong>Reference Number: </strong>{{ last_appointment.reference_number }}</p>
+       <p><strong>Doctor:</strong> {% if last_appointment.doctor %}
+        {{ last_appointment.doctor.name }}
+    {% else %}
+        No doctor assigned
+    {% endif %}</p>
+       <p><strong>Assistant: </strong>{% if last_appointment.assistant %}
+        {{ last_appointment.assistant.name }}
+    {% else %}
+        No assistant assigned
+    {% endif %}</p>
+       <p><strong></strong></p>
+    </div>    
+</div>
+
+{% else %}
+    <p>No appointments found.</p>
+{% endif %}
+
+
+<style>.circular-imga {
+    border-radius: 50%;
+    max-width: 100px;
+    height: auto;
+    align-items: center;
+    margin-right: 10px;
+    
+}
+.Size {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.Container {
+    background-color: #ffffffc0;
+    color: rgb(0, 0, 0);
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center; /* Center text content */
+}
+.Container img {
+    border-radius: 50%;
+   
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle; /* Align image vertically */
+}
+@media screen and (max-width: 768px) {
+    .Container {
+        width: 100%;
+    }
+    .Size {
+      width: 100%;
+    }
+   
+}
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, rgb(80, 22, 22), rgb(71, 1, 1));
+}
+
+p {
+    font-size: 16px;
+    text-align: center;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+   
+
+    
+</style>
+</body>
+</html>
+
+
+
+

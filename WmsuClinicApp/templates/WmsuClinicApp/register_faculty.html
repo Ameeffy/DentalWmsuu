@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty and Staff Registration</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <style>
+        .input-group p {
+            color: rgb(141, 11, 37);
+    font-size: 14px; 
+    margin-top: 10px; 
+}
+.input-group-gender p {
+            color: rgb(141, 11, 37);
+    font-size: 14px; 
+    margin-top: 10px; 
+}
+
+        *,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #b9b9b9;
+  background-color: #e3e3e3;
+}
+     h4{
+        color: #DC143C;
+     }
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px; 
+}
+
+.columns-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group i::after {
+    content: "|";
+    margin-left: 10px;
+    font-size: 16px; /* Adjust font size as needed */
+    display: inline; /* Ensure inline-block display */
+    max-width: 15px; /* Set a fixed width */
+    text-align: center; /* Center the content horizontally */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+
+.input-group {
+  flex-direction: column;
+        align-items: stretch;
+        border: none;
+        padding: 0;
+        margin-bottom: 20px;
+    border: 1px solid #ccb3b3f6;
+    padding: 5px;
+    width: 80%;
+}
+
+.input-group i {
+    margin-right: 10px;
+    padding-right: 10px;
+    font-size: 16px; /* Adjust font size as needed */
+    display: inline-block; /* Ensure inline-block display */
+    width: 20px; /* Set a fixed width */
+    text-align: center; /* Center the content horizontally */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    color: rgb(141, 11, 37);
+}
+
+.input-group label {
+   
+    display: none;
+}
+
+form input[type="text"],
+
+
+form input[type="number"],
+form input[type="date"],
+form input[type="select"],
+form select,
+form textarea {
+    border: 1px solid #cccccccb; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    padding: 8px; /* Add padding */
+    margin-left: 10px;
+    width: 80%; /* Make sure the fields take up the full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    background-color: #e3e3e3;
+    
+}
+
+
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+}
+
+form input[type="password"],
+form input[type="email"]
+ {
+    border: 1px solid #cccccccb; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    padding: 8px; /* Add padding */
+    margin-left: 10px;
+    width: 80%; /* Make sure the fields take up the full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    background-color: #e3e3e3;
+    
+}
+
+.input-group-gender{
+   display: flex;
+   justify-content: center;
+   margin-right: 120px;
+}
+.input-group-gender input[type="radio"] {
+  display: none; 
+}
+form select {
+    text-align: center;
+}
+.input-group-gender label {
+  display: inline-block;
+  justify-content: center;
+  width: 20%;
+  text-align: center;
+  border-radius: 0;
+  background-color: rgb(148, 8, 36); 
+  color: #fff;
+  border: 1px solid rgb(133, 12, 36);
+  margin-bottom: 20px;
+  margin-right: 5px;
+  padding: 7.5px;
+  
+
+}
+
+
+.input-group-gender label:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.input-group-gender label:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.input-group-gender input[type="radio"]:checked + label {
+  background-color: rgb(190, 8, 44); 
+}
+
+
+      
+@media screen and (max-width: 768px) {
+    .columns-wrapper {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100%;
+    }
+
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+        border: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .input-group label {
+        flex: 0 0 auto;
+        margin-bottom: 5px;
+        padding: 0;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 90%;
+        margin-left: 0;
+        margin-top: 5px; /* Adjust spacing between input/select and label */
+    }
+
+    .input-group i {
+        display: none; /* Hide icon on smaller screens */
+    }
+    form input[type="text"],
+
+form input[type="number"],
+form input[type="date"],
+form input[type="select"],
+form select,
+form textarea {
+    border: 1px solid #cccccccb; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    padding: 8px; /* Add padding */
+   margin-right: 10px;
+    width: 90%; /* Make sure the fields take up the full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    
+}
+
+/* Remove default outline */
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus,
+form input[type="number"]:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+}
+form input[type="password"],
+form input[type="email"]
+ {
+    border: 1px solid #cccccccb; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    padding: 8px; /* Add padding */
+    margin-left: 10px;
+    width: 80%; /* Make sure the fields take up the full width */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    background-color: #e3e3e3;
+    
+}
+#terms {
+  width: 90%;
+}
+.input-group-gender label {
+  display: inline-block;
+  justify-content: center;
+  width: 50%;
+  text-align: center;
+  border-radius: 0;
+  background-color: rgb(148, 8, 36); 
+  color: #fff;
+  border: 1px solid rgb(133, 12, 36);
+  margin-bottom: 20px;
+  margin-right: 5px;
+  padding: 7.5px;
+  
+
+}
+
+
+.input-group-gender label:first-of-type {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.input-group-gender label:last-of-type {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.input-group-gender input[type="radio"]:checked + label {
+  background-color: rgb(190, 8, 44); 
+}
+}
+
+  
+    </style>
+</head>
+
+<body>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+   <div class="container">
+    <form method="POST" autocomplete="off" onsubmit="event.preventDefault(); confirmSubmission();">
+        {% csrf_token %}
+        {% if register_form.is_bound and register_form.is_valid %}
+        <script>
+            Swal.fire({
+                title: 'Successfully Registered',
+                text: 'You have successfully saved your data',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                
+                iconColor: '#28a745', 
+                customClass: {
+                    popup: 'custom-swal2-popup',
+                    title: 'custom-success-swal2-title',
+                    content: 'custom-swal2-content',
+                    htmlContainer: 'custom-success-swal2-html-container'
+                },
+                onClose: function() {
+                    window.location.href = "{% url '' %}";
+                }
+            });
+        </script>
+        
+        <style>
+            .custom-swal2-popup {
+                backdrop-filter: blur(5px); 
+            }
+            /* Custom styles for the success SweetAlert dialog */
+            .custom-success-swal2-title {
+                color: #DC143C; /* Set the title color to black */
+            }
+            .custom-swal2-content{
+                color: #DC143C; 
+            }
+            .custom-success-swal2-html-container {
+                color: #DC143C; /* Set the content text color to black */
+                                }
+            
+        </style>
+    {% endif %}
+        <div class="columns-wrapper">
+            <div class="column">
+                <h4>Faculty and Staff Account</h4>
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    {{ register_form.username }}
+                    {% for error in register_form.username.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-key"></i>
+                    {{ register_form.password1 }}
+                    {% for error in register_form.password1.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-key"></i>
+                    {{ register_form.password2 }}
+                    {% for error in register_form.password2.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            
+           
+              <h4>Contact Person</h4>
+              <div class="input-group">
+                  <i class="fa fa-key"></i>
+                  <label for="id_parent_name">Full Name:</label>
+                  {{ register_form.parent_name }}
+                  {% for error in register_form.parent_name.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+              </div>
+              <div class="input-group">
+                  <i class="fas fa-home"></i>
+                  <label for="id_parent_address">Guardian Address:</label>
+                  {{ register_form.parent_address }}
+                  {% for error in register_form.parent_address.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+              </div>
+              <div class="input-group">
+                  <i class="fas fa-phone"></i>
+                  <label for="id_parent_telephone_number">Guardian Telephone Number:</label>
+                  {{ register_form.parent_telephone_number }}
+                  {% for error in register_form.parent_telephone_number.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+              </div>
+              <div class="input-group">
+                  <i class="fas fa-user-friends"></i>
+                  <label for="id_relationship">Relationship with Guardian:</label>
+                  {{ register_form.relationship }}
+                  {% for error in register_form.relationship.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+              </div>
+          </div>
+            <div class="column">
+                <h4>Profile Information</h4>
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <label for="id_first_name">First Name:</label>
+                    {{ register_form.first_name }}
+                    {% for error in register_form.first_name.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <label for="id_last_name">Last Name:</label>
+                    {{ register_form.last_name }}
+                    {% for error in register_form.last_name.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fa fa-user"></i>
+                    <label for="id_last_name">Middle Name:</label>
+                    {{ register_form.middle_name }}
+                    {% for error in register_form.middle_name.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <label for="id_email">Email Address:</label>
+                    {{ register_form.email }}
+                    {% for error in register_form.email.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-hashtag"></i>
+                    <label for="id_ID_Number">ID Number:</label>
+                    {{ register_form.ID_Number }}
+                    {% for error in register_form.ID_Number.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-birthday-cake"></i>
+                    <label for="id_date_of_birth">Date of Birth:</label>
+                    {{ register_form.date_of_birth }}
+                    {% for error in register_form.date_of_birth.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <h4 style="display: flex; justify-content: center; margin-right: 120px; margin-top: -10px; margin-bottom: 5px;">Select Sex</h4>
+                <div class="input-group-gender">
+                    
+                    <input type="radio" id="male" name="gender" value="male" {% if register_form.gender == 'male' %} checked {% endif %}>
+                    <label for="male"><i class="fas fa-mars"></i> Male</label>
+                    
+                    <input type="radio" id="female" name="gender" value="female" {% if register_form.gender == 'female' %} checked {% endif %}>
+                    <label for="female"><i class="fas fa-venus"></i> Female</label>
+                   
+                    {% for error in register_form.gender.errors %}
+                    <p>{{ error }} Select Sex</p>
+                    {% endfor %}
+                  </div>
+                  
+                <div class="input-group" style="display:none;">
+                  <i class="fas fa-school"></i>
+                  <label for="id_course">Department:</label>
+                  {{ register_form.user_type }}
+                  {% for error in register_form.user_type.errors %}
+                  <p>{{ error }}</p>
+                  {% endfor %}
+              </div>
+                <div class="input-group">
+                    <i class="fas fa-school"></i>
+                    <label for="id_course">position:</label>
+                    {{ register_form.position }}
+                    {% for error in register_form.position.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+    
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <label for="id_contact_number">Contact Number:</label>
+                    {{ register_form.contact_number }}
+                    {% for error in register_form.contact_number.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <label for="id_place_of_birth">Place of Birth:</label>
+                    {{ register_form.place_of_birth }}
+                    {% for error in register_form.place_of_birth.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-home"></i>
+                    <label for="id_home_address">Home Address:</label>
+                    {{ register_form.home_address }}
+                    {% for error in register_form.home_address.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-heart"></i>
+                    <label for="id_status_in_life">Status in Life:</label>
+                    {{ register_form.status_in_life }}
+                    {% for error in register_form.status_in_life.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-praying-hands"></i>
+                    <label for="id_religion">Religion:</label>
+                    {{ register_form.religion }}
+                    {% for error in register_form.religion.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-arrows-alt-v"></i>
+                    <label for="id_height_Centimeters">Height:</label>
+                    {{ register_form.height_Centimeters }}
+                    {% for error in register_form.height_Centimeters.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-weight"></i>
+                    <label for="id_weight_Kilogram">Weight:</label>
+                    {{ register_form.weight_Kilogram }}
+                    {% for error in register_form.weight_Kilogram.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+           
+        </div>
+        <div>
+            <h4>Terms and Conditions</h4>
+            <div class="input-group-checkbox">
+              <input id="terms" type="checkbox">
+              <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label> <div id="message-container"></div>
+            </div>
+          </div>
+          
+          <input type="submit" value="Register" />
+
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Add event listener to form submission
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // Iterate over each text input field
+        document.querySelectorAll('form input[type="text"]').forEach(function(input) {
+            // Capitalize the first letter of the input value
+            input.value = capitalizeFirstLetter(input.value);
+        });
+    });
+
+    // Function to capitalize the first letter of a string
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    }
+});
+
+
+</script>
+<style>
+    #message-container {
+        color: #DC143C;
+    }input[type="submit"] {
+        background-color: crimson;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    /* Hover effect for the submit button */
+    input[type="submit"]:hover {
+        background-color: darkred;
+    }
+</style>
+<script>
+   function confirmSubmission() {
+        // Check if all required fields are filled
+        var allFieldsFilled = checkAllFieldsFilled();
+        var checkBoxChecked = document.getElementById('terms').checked;
+
+        // Show confirmation dialog only if all fields are filled and the checkbox is checked
+        if (allFieldsFilled && checkBoxChecked) {
+            var confirmation = document.createElement('div');
+            confirmation.classList.add('confirmation-dialog');
+            confirmation.innerHTML = `
+                <div class="confirmation-message">
+                    <p>Are you sure you want to submit the form?</p>
+                    <div class="confirmation-buttons">
+                        <button onclick="submitForm()">Yes</button>
+                        <button onclick="cancelSubmission()">No</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(confirmation);
+        } else if (!checkBoxChecked) {
+            showMessage("Please accept the terms and conditions.");
+        } else {
+            console.log("Not all fields are filled. Cannot submit.");
+        }
+    }
+    function showMessage(message) {
+        var messageContainer = document.getElementById('message-container');
+        messageContainer.innerHTML = '<p>' + message + '</p>';
+    }
+
+    function checkAllFieldsFilled() {
+        var requiredFields = document.querySelectorAll('form input[required]');
+        for (var i = 0; i < requiredFields.length; i++) {
+            if (!requiredFields[i].value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function submitForm() {
+        console.log("Form submission initiated...");
+        document.querySelector('form').submit();
+        // Remove the confirmation dialog after form submission
+        var confirmation = document.querySelector('.confirmation-dialog');
+        confirmation.parentNode.removeChild(confirmation);
+    }
+
+    function cancelSubmission() {
+        console.log("Form submission cancelled.");
+        var confirmation = document.querySelector('.confirmation-dialog');
+        confirmation.parentNode.removeChild(confirmation);
+    }
+</script>
+
+
+
+
+<style>.confirmation-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    color: #DC143C;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.confirmation-message {
+    text-align: center;
+}
+
+.confirmation-buttons {
+    margin-top: 20px;
+}
+
+.confirmation-buttons button {
+    margin: 0 10px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.confirmation-buttons button:hover {
+    background-color: #f0f0f0;
+}
+.input-group-checkbox {
+    margin-bottom: 15px;
+  }
+  
+  .input-group-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .input-group-checkbox label {
+    display: inline-block;
+    vertical-align: middle;
+    color: crimson;
+    transition: color 0.3s ease;
+  }
+  
+  .input-group-checkbox label:hover {
+    color: rgba(220, 20, 60, 0.7);
+  }
+.back-to-home {
+    position: fixed;
+    top: 0px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    background: url('../../static/images/back.png') no-repeat center;
+    background-size: contain;
+    display: block;
+    z-index: 9999; 
+}
+
+
+.back-to-home a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.back-to-home:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+  </style>
+
+    
+  
+        <a href="{% url 'select_user_type' %}" class="back-to-home"></a>
+    
+    
+    
+</body>
+
+</html>

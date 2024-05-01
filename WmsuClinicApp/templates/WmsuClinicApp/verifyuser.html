@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, rgb(80, 22, 22), rgb(71, 1, 1));
+            color: #fff; /* Text color */
+        }
+
+        h2 {
+            margin-top: 45px;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.87);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 45px;
+            color: #000;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: crimson;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: crimson;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #8b0000;
+        }.error-message {
+            color: crimson;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Verify User</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-group">
+            {% if form.ID_Number.errors %}
+            <div class="error-message">
+                {{ form.ID_Number.errors|join:" " }}
+            </div> <br>
+            {% endif %}
+            <label for="ID_Number"><i class="fas fa-user"></i> ID Number</label>
+            {{ form.ID_Number }}
+        </div>
+        <p>Attempts: {{ attempt_count }}</p>
+        <p><em>Only 5 attempts allowed.</em> <em>If you reach 5 attempts,</em></p>
+<p><em>you'll be redirected back to the forgot password page.</em></p>
+
+
+        <button type="submit">Submit</button>
+    </form>
+    
+    
+    
+    
+   
+</body>
+</html>

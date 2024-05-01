@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Report</title>
+    <link rel="shortcut icon" type="image/JPG" href="../../static/images/LOGODENTAL.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
+    
+    <style>
+        :before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  padding: 1em;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+ 
+  background: linear-gradient(to left, rgb(29, 28, 28), rgb(14, 11, 11));
+}
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f1e7e7;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .errorlist {
+            display: none;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+        }
+    
+    .swal2-popup {
+        background-color: #131010f5; 
+    }
+
+    .swal2-title {
+        color: #ffffff; 
+    }
+
+    .swal2-content {
+        color: #ffffff; 
+    }
+
+   
+    .swal2-confirm {
+        background-color: #28a745 !important; 
+        color: #ffffff !important; 
+    }
+
+    
+    .swal2-cancel {
+        background-color: #dc3545 !important; 
+        color: #ffffff !important; 
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Report {{ username }}'s Appointment</h2>
+        <form id="myForm" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+            <a href="{% url 'admin_homesite' %}"><i class="fas fa-arrow-left"></i> Back to Assessment</a>
+        </form>
+        
+        <script>
+            document.getElementById("myForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+        
+                // You can customize the SweetAlert message here
+                Swal.fire({
+                    title: 'You are about to submit the form.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, submit it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, submit the form
+                        this.submit();
+                    }
+                });
+            });
+        </script>
+        
+        
+        
+        
+    </div>
+</body>
+</html>
